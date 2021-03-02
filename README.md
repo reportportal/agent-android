@@ -1,2 +1,2 @@
 # agent-android
-Android Espresso integration for ReportPortal
+Android Espresso JUnit5 integration for ReportPortal
