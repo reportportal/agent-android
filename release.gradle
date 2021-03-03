@@ -110,6 +110,12 @@ bintray {
     }
 }
 
+release {
+    git {
+        requireBranch = 'main'
+    }
+}
+
 afterEvaluate {
     def releaseDependencies = [bintrayUpload, publish]
     releaseDependencies.addAll(afterReleaseBuild.getDependsOn())
