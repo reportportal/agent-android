@@ -1,6 +1,8 @@
 apply plugin: 'signing'
 apply plugin: 'maven-publish'
 apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'net.researchgate.release'
 
 task androidSourcesJar(type: Jar) {
     archiveClassifier.set('sources')
@@ -17,45 +19,83 @@ artifacts {
     archives javadocJar
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                groupId project.group
-                artifactId project.name
-                version project.version
+project.ext.githubUserName = project.hasProperty('githubUserName') ? githubUserName : ""
+project.ext.githubToken = project.hasProperty('githubToken') ? githubToken : ""
 
-                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-                artifact androidSourcesJar
-                artifact javadocJar
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version project.version
 
-                pom {
-                    name = project.name
-                    description = project.description
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            artifact androidSourcesJar
+            artifact javadocJar
 
-                    licenses {
-                        license {
-                            name = "The Apache Software License, Version 2.0"
-                            url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                        }
+            pom {
+                name = project.name
+                description = project.description
+
+                licenses {
+                    license {
+                        name = "The Apache Software License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
                     }
+                }
 
-                    // Include transitive dependencies
-                    withXml {
-                        def dependenciesNode = asNode().appendNode("dependencies")
-                        project.configurations.implementation
-                                .allDependencies
-                                .findAll { it.name != "unspecified" }
-                                .each {
-                                    def dependencyNode = dependenciesNode.appendNode("dependency")
-                                    dependencyNode.appendNode("groupId", it.group)
-                                    dependencyNode.appendNode("artifactId", it.name)
-                                    dependencyNode.appendNode("version", it.version)
-                                    dependencyNode.appendNode("scope", "runtime")
-                                }
-                    }
+                // Include transitive dependencies
+                withXml {
+                    def dependenciesNode = asNode().appendNode("dependencies")
+                    project.configurations.implementation
+                            .allDependencies
+                            .findAll { it.name != "unspecified" }
+                            .each {
+                                def dependencyNode = dependenciesNode.appendNode("dependency")
+                                dependencyNode.appendNode("groupId", it.group)
+                                dependencyNode.appendNode("artifactId", it.name)
+                                dependencyNode.appendNode("version", it.version)
+                                dependencyNode.appendNode("scope", "runtime")
+                            }
                 }
             }
         }
     }
+
+    repositories {
+        maven {
+            name = "agent-android"
+            url = uri("https://maven.pkg.github.com/reportportal/agent-android")
+            credentials {
+                username = githubUserName
+                password = githubToken
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publications = ['mavenJava']
+    publish = true
+    pkg {
+        repo = 'reportportal'
+        name = "$project.name"
+        desc = "$project.description"
+        websiteUrl = 'https://reportportal.github.io/'
+        issueTrackerUrl = "https://github.com/reportportal/$rootProject.name/issues"
+        vcsUrl = "https://github.com/reportportal/$rootProject.name"
+        githubRepo = "reportportal/$rootProject.name"
+        githubReleaseNotesFile = 'CHANGELOG.md'
+
+        userOrg = 'epam'
+        licenses = ['Apache-2.0']
+    }
+}
+
+afterEvaluate {
+    def releaseDependencies = [bintrayUpload, publish]
+    releaseDependencies.addAll(afterReleaseBuild.getDependsOn())
+    afterReleaseBuild.setDependsOn(releaseDependencies)
 }
