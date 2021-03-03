@@ -33,6 +33,8 @@ env:
   README_FILE: README.md
   README_TEMPLATE_FILE: README_TEMPLATE.md
   README_VERSION_PLACEHOLDER: $LATEST_VERSION
+  RELEASE_BRANCH: main
+  DEVELOP_BRANCH: develop
 
 jobs:
   release:
@@ -106,3 +108,19 @@ jobs:
           body: ${{ steps.readChangelogEntry.outputs.log_entry }}
           draft: false
           prerelease: true
+
+      - name: Checkout develop branch
+        if: ${{github.ref}} == ${{env.RELEASE_BRANCH}}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{env.DEVELOP_BRANCH}}
+          fetch-depth: 0
+
+      - name: Merge release branch into develop
+        id: mergeIntoDevelop
+        if: ${{github.ref}} == ${{env.RELEASE_BRANCH}}
+        run: |
+          git merge -m 'Merge release branch into develop after a release' origin/${{env.RELEASE_BRANCH}}
+          git status | (! grep -Fq 'both modified:') || git status | grep -F 'both modified:' \
+          | { echo -e 'Unable to merge release into develop, merge conflicts:'; (! grep -Eo '[^ ]+$') }
+          git push origin ${{env.DEVELOP_BRANCH}}
