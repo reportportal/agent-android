@@ -69,6 +69,7 @@ project.afterEvaluate {
     processDebugJavaRes.configure {
         filesMatching("agent.properties") { expand(project.properties) }
     }
+
     processReleaseJavaRes.configure {
         filesMatching("agent.properties") { expand(project.properties) }
     }
