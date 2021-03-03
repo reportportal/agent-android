@@ -25,7 +25,7 @@ on:
       - CHANGELOG.md
 
 env:
-  VERSION_FILE: gradle.properties
+  VERSION_FILE: agent-android-junit5/gradle.properties
   VERSION_EXTRACT_PATTERN: '(?<=version=).+'
   GH_USER_NAME: github.actor
   CHANGE_LOG_FILE: CHANGELOG.md
