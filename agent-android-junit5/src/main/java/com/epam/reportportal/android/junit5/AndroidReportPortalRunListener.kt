@@ -15,7 +15,6 @@
  */
 
 @file:Suppress("ControlFlowWithEmptyBody")
-
 package com.epam.reportportal.android.junit5
 
 import org.junit.runner.Result

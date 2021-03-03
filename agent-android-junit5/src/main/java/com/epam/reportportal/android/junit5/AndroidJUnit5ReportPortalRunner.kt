@@ -22,7 +22,7 @@ import androidx.test.runner.AndroidJUnitRunner
 class AndroidJUnit5ReportPortalRunner : AndroidJUnitRunner() {
     override fun onCreate(arguments: Bundle) {
         arguments.putString("runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder")
-        arguments.putString("listener", "com.epam.test.android.espresso.junit5.AndroidReportPortalRunListener")
+        arguments.putString("listener", AndroidReportPortalRunListener::class.qualifiedName)
         super.onCreate(arguments)
     }
 }
