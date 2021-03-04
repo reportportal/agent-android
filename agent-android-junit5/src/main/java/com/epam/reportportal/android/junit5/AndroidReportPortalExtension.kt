@@ -16,7 +16,7 @@
 
 package com.epam.reportportal.android.junit5
 
-import com.epam.reportportal.junit5.ReportPortalExtension
+import android.com.epam.reportportal.junit5.ReportPortalExtension
 
 class AndroidReportPortalExtension : ReportPortalExtension() {
     init {
