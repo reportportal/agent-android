@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
 }
 
+apply plugin: 'com.github.johnrengelman.shadow'
 apply from: "${rootProject.rootDir}/release.gradle"
 
 android {
@@ -51,18 +51,50 @@ android {
     }
 }
 
+
+configurations {
+    internalize
+}
+
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+task internalizeJar(type: ShadowJar) {
+    dependencies {
+        include(dependency('com.epam.reportportal:agent-java-junit5'))
+    }
+
+    archiveClassifier.set('intern')
+    archiveVersion.set('')
+    exclude 'agent.properties'
+
+    def pkg = 'com.epam.reportportal.junit5'
+    def shadowPrefix = 'android'
+    relocate pkg, [shadowPrefix, pkg].join('.')
+    configurations = [project.configurations.internalize]
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Android Espresso libraries
+    api "androidx.test:runner:1.3.0"
     implementation 'androidx.test.ext:junit:1.1.2'
     implementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // Report Portal libraries
-    implementation ('com.epam.reportportal:agent-java-junit5:5.1.0-BETA-2') {
-        exclude group: 'org.aspectj'
-    }
+    internalize 'com.epam.reportportal:agent-java-junit5:5.1.0-BETA-2'
+    api tasks.internalizeJar.outputs.files
+    api 'com.epam.reportportal:client-java:5.1.0-BETA-1'
+    api 'com.google.code.findbugs:jsr305:3.0.2'
+    api 'com.epam.reportportal:commons-model:5.0.0'
 
+    // JUnit 5
+    api "org.junit.jupiter:junit-jupiter-api:${project.junit5Version}"
+    implementation "org.junit.platform:junit-platform-runner:${project.junit5RunnerVersion}"
+    implementation "org.junit.jupiter:junit-jupiter-engine:${project.junit5Version}"
+
+    // android-junit5 necessary libraries
+    implementation 'de.mannodermaus.junit5:android-test-core:1.2.1'
+    implementation 'de.mannodermaus.junit5:android-test-runner:1.2.1'
 }
 
 project.afterEvaluate {
