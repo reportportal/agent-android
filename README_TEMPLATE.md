@@ -195,7 +195,7 @@ You also need to create a file named `reportportal.properties` in your project i
 ```properties
 # '10.0.2.2' - is a special alias to your dev host loopback interface (i.e., 127.0.0.1 on your development machine)
 rp.endpoint = http://10.0.2.2:8080
-rp.api.key=your_api_key
+rp.api.key = your_api_key
 rp.launch = Android JUnit 5 Tests
 rp.project = default_personal
 ```
