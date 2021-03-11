@@ -34,8 +34,8 @@ To start using Report Portal with Android please do the following steps:
 3. [Running tests](#test-run)
    * Build system commands
 4. Examples
-   [Kotlin](#kotlin-examples)
-   [Java](#java-examples)
+   * [Kotlin](#kotlin-examples)
+   * [Java](#java-examples)
 
 ## Configuration
 ### Add test module
