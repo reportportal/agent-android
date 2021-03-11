@@ -221,7 +221,8 @@ junit.jupiter.execution.parallel.config.fixed.parallelism=5
 ### Debug Manifest file
 Report Portal agent uses Rest API calls to report test, but Android does not allow plain text 
 requests by default. To do this please add `debug` folder inside `src` folder of your application 
-module and put `AndroidManifest.xml` file there with the following content:
+module and put `AndroidManifest.xml` file there with the following content 
+(change `package` attribute on your own):
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
