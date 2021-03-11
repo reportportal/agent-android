@@ -29,10 +29,13 @@ To start using Report Portal with Android please do the following steps:
    * Debug Manifest file
 2. Logging configuration
    * [Logback Framework](#logback-framework)
-      * Create/update the `logback.xml` file
       * Add Logback dependencies
+      * Create/update the `logback.xml` file
 3. [Running tests](#test-run)
    * Build system commands
+4. Examples
+   [Kotlin](#kotlin-examples)
+   [Java](#java-examples)
 
 ## Configuration
 ### Add test module
@@ -242,10 +245,63 @@ This overrides some properties in your original manifest allowing plain text req
 test phase only.
 
 ## Logging configuration
-
 ### Logback Framework
+#### Logback dependencies
+Put this dependency into `dependencies` section of your `build.gradle` file of integration test 
+module:
+```groovy
+implementation ('com.epam.reportportal:logger-java-logback:5.0.3') {
+    exclude group: 'com.epam.reportportal' // Already included by the agent dependency
+}
+``` 
 
 #### 'logback.xml' file
+To add logging configuration put a file named `logback.xml` into `src/main/resources` folder:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Send debug messages to System.out -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- By default, encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{5} - %thread - %msg%n</pattern>
+        </encoder>
+    </appender>
 
+    <appender name="RP" class="com.epam.reportportal.logback.appender.ReportPortalAppender">
+        <encoder>
+            <!--Best practice: don't put time and logging level to the final message. Appender do this for you-->
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n</pattern>
+            <pattern>[%t] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--'additivity' flag is important! Without it logback will double-log log messages-->
+    <logger name="binary_data_logger" level="TRACE" additivity="false">
+        <appender-ref ref="RP"/>
+    </logger>
+
+    <!-- Mute Report Portal messages -->
+    <logger name="com.epam.reportportal.service" level="WARN"/>
+    <logger name="com.epam.reportportal.utils" level="WARN"/>
+
+    <!-- By default, the level of the root level is set to DEBUG -->
+    <root level="DEBUG">
+        <appender-ref ref="RP"/>
+        <!-- Uncomment if you want to see console logs -->
+        <!-- <appender-ref ref="STDOUT"/> -->
+    </root>
+</configuration>
+```
 ## Test run
 ### Build system commands
+To run tests from command-line execute:
+```shell script
+gradlew junit5-integration-tests:connectedAndroidTest
+```
+
+## Examples
+### Kotlin examples
+See: https://github.com/reportportal/android-kotlin-example
+### Java examples
+See: https://github.com/reportportal/android-java-example
