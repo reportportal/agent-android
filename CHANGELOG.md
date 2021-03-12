@@ -1,14 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- JUnit 5 agent version updated on [5.1.0-BETA-4](https://github.com/reportportal/agent-java-junit5/releases/tag/5.1.0-BETA-4)
 
 ## [5.1.0-BETA-4]
-
-## [5.1.0-BETA-3]
-
-## [5.1.0-BETA-2]
-
-## [5.1.0-BETA-1]
 ### Added
 - Initial plugin release
 
