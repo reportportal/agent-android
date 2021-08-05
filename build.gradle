@@ -18,13 +18,12 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter() // TODO: get rid of it ASAP!
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.4.20'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
         classpath 'net.researchgate:gradle-release:2.8.1'
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
     }
@@ -34,7 +33,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter() // TODO: get rid of it ASAP!
+        jcenter()
     }
 }
 
