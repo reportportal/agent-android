@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-apply plugin: 'signing'
 apply plugin: 'maven-publish'
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'net.researchgate.release'
@@ -74,6 +73,11 @@ publishing {
             artifact androidSourcesJar
             artifact javadocJar
 
+            pom {
+                name = project.name
+                description = project.description
+            }
+
             pom.withXml {
                 def root = asNode()
                 root.children().last() + pomConfig
@@ -115,21 +119,10 @@ publishing {
     }
 }
 
-signing {
-    def signingKey = project.findProperty('gpgPrivateKey')
-    def signingPassword = project.findProperty('gpgPassphrase')
-    useInMemoryPgpKeys(signingKey, signingPassword)
-    sign publishing.publications
-}
-
 release {
     git {
         requireBranch = 'main'
     }
 }
 
-afterEvaluate {
-    def releaseDependencies = [publish]
-    releaseDependencies.addAll(afterReleaseBuild.getDependsOn())
-    afterReleaseBuild.setDependsOn(releaseDependencies)
-}
+afterReleaseBuild.dependsOn publish
