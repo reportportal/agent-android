@@ -38,6 +38,31 @@ project.ext.githubUserName = project.hasProperty('githubUserName') ? githubUserN
 project.ext.githubToken = project.hasProperty('githubToken') ? githubToken : ""
 project.ext.publishRepo = project.hasProperty('publishRepo') ? publishRepo : ""
 
+def pomConfig = {
+    url "https://github.com/reportportal/${project.name}"
+    packaging 'aar'
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            name 'EPAM Systems'
+            email 'support@reportportal.io'
+            organization 'ReportPortal.io'
+            organizationUrl 'http://www.reportportal.io'
+        }
+    }
+    scm {
+        connection "scm:git:https://github.com/reportportal/${project.name}.git"
+        developerConnection "scm:git:ssh://git@github.com:reportportal/${project.name}.git"
+        url "https://github.com/reportportal/${project.name}/tree/master"
+    }
+}
+
 publishing {
     publications {
         release(MavenPublication) {
@@ -49,57 +74,31 @@ publishing {
             artifact androidSourcesJar
             artifact javadocJar
 
-            pom {
-                name = project.name
-                description = project.description
-                packaging 'aar'
+            pom.withXml {
+                def root = asNode()
+                root.children().last() + pomConfig
 
-                licenses {
-                    license {
-                        name = "The Apache Software License, Version 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                    }
-                }
-
-                // Include transitive dependencies
-                withXml {
-                    developers {
-                        developer {
-                            'name' 'EPAM Systems'
-                            email 'support@reportportal.io'
-                            organization 'ReportPortal.io'
-                            organizationUrl 'http://www.reportportal.io'
+                def dependenciesNode = asNode().appendNode("dependencies")
+                project.configurations.implementation
+                        .allDependencies
+                        .findAll { it.name != "unspecified" }
+                        .each {
+                            def dependencyNode = dependenciesNode.appendNode("dependency")
+                            dependencyNode.appendNode("groupId", it.group)
+                            dependencyNode.appendNode("artifactId", it.name)
+                            dependencyNode.appendNode("version", it.version)
+                            dependencyNode.appendNode("scope", "runtime")
                         }
-                    }
-
-                    scm {
-                        connection "scm:git:https://github.com/reportportal/${project.name}.git"
-                        developerConnection "scm:git:ssh://git@github.com:reportportal/${project.name}.git"
-                        url "https://github.com/reportportal/${project.name}/tree/master"
-                    }
-
-                    def dependenciesNode = asNode().appendNode("dependencies")
-                    project.configurations.implementation
-                            .allDependencies
-                            .findAll { it.name != "unspecified" }
-                            .each {
-                                def dependencyNode = dependenciesNode.appendNode("dependency")
-                                dependencyNode.appendNode("groupId", it.group)
-                                dependencyNode.appendNode("artifactId", it.name)
-                                dependencyNode.appendNode("version", it.version)
-                                dependencyNode.appendNode("scope", "runtime")
-                            }
-                    project.configurations.api
-                            .allDependencies
-                            .findAll { it.name != "unspecified" }
-                            .each {
-                                def dependencyNode = dependenciesNode.appendNode("dependency")
-                                dependencyNode.appendNode("groupId", it.group)
-                                dependencyNode.appendNode("artifactId", it.name)
-                                dependencyNode.appendNode("version", it.version)
-                                dependencyNode.appendNode("scope", "compile")
-                            }
-                }
+                project.configurations.api
+                        .allDependencies
+                        .findAll { it.name != "unspecified" }
+                        .each {
+                            def dependencyNode = dependenciesNode.appendNode("dependency")
+                            dependencyNode.appendNode("groupId", it.group)
+                            dependencyNode.appendNode("artifactId", it.name)
+                            dependencyNode.appendNode("version", it.version)
+                            dependencyNode.appendNode("scope", "compile")
+                        }
             }
         }
     }
