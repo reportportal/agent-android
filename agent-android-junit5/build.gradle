@@ -19,7 +19,9 @@ plugins {
 }
 
 apply plugin: 'com.github.johnrengelman.shadow'
+
 apply from: "${rootProject.rootDir}/release.gradle"
+apply from: "${project.scripts_url}/${project.scripts_branch}/signing.gradle"
 
 android {
     compileSdkVersion 30
