@@ -39,7 +39,6 @@ project.ext.publishRepo = project.hasProperty('publishRepo') ? publishRepo : ""
 
 def pomConfig = {
     url "https://github.com/reportportal/${project.name}"
-    packaging 'aar'
     licenses {
         license {
             name "The Apache Software License, Version 2.0"
