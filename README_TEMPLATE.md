@@ -4,15 +4,14 @@
 > after a successful launch start. This information might help us to improve both ReportPortal backend and client sides. It is used by the
 > ReportPortal team only and is not supposed for sharing with 3rd parties.
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.epam.reportportal/agent-android-junit5.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.epam.reportportal%22%20AND%20a:%22agent-android-junit5%22)
 ![CI Build](https://github.com/reportportal/agent-android/workflows/CI%20Build/badge.svg?branch=develop)
-[ ![Download](https://api.bintray.com/packages/epam/reportportal/agent-android-junit5/images/download.svg) ](https://bintray.com/epam/reportportal/agent-android-junit5/_latestVersion)
-
 [![Join Slack chat!](https://reportportal-slack-auto.herokuapp.com/badge.svg)](https://reportportal-slack-auto.herokuapp.com)
 [![stackoverflow](https://img.shields.io/badge/reportportal-stackoverflow-orange.svg?style=flat)](http://stackoverflow.com/questions/tagged/reportportal)
 [![Build with Love](https://img.shields.io/badge/build%20with-❤%EF%B8%8F%E2%80%8D-lightgrey.svg)](http://reportportal.io?style=flat)
 
 
-The latest version: $LATEST_VERSION. Please use `Download` link above to get the agent. Minimal supported API version: 26
+The latest version: $LATEST_VERSION. Please use `Maven Central` link above to get the agent. Minimal supported API version: 26
 
 ## Overview: How to Add ReportPortal integration to Your Android Project
 Report Portal supports Android Espresso JUnit 5 tests. The integration is built on top of
@@ -111,7 +110,7 @@ plugins {
 }
 
 repositories {
-    maven { url "http://dl.bintray.com/epam/reportportal" }
+    mavenCentral()
 }
 
 android {
