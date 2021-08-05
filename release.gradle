@@ -36,6 +36,7 @@ artifacts {
 
 project.ext.githubUserName = project.hasProperty('githubUserName') ? githubUserName : ""
 project.ext.githubToken = project.hasProperty('githubToken') ? githubToken : ""
+project.ext.publishRepo = project.hasProperty('publishRepo') ? publishRepo : ""
 
 publishing {
     publications {
@@ -51,6 +52,7 @@ publishing {
             pom {
                 name = project.name
                 description = project.description
+                packaging 'aar'
 
                 licenses {
                     license {
@@ -82,6 +84,21 @@ publishing {
                                 dependencyNode.appendNode("version", it.version)
                                 dependencyNode.appendNode("scope", "compile")
                             }
+
+                    developers {
+                        developer {
+                            name 'EPAM Systems'
+                            email 'support@reportportal.io'
+                            organization 'ReportPortal.io'
+                            organizationUrl 'http://www.reportportal.io'
+                        }
+                    }
+
+                    scm {
+                        connection "scm:git:https://github.com/reportportal/${project.name}.git"
+                        developerConnection "scm:git:ssh://git@github.com:reportportal/${project.name}.git"
+                        url "https://github.com/reportportal/${project.name}/tree/master"
+                    }
                 }
             }
         }
@@ -90,7 +107,7 @@ publishing {
     repositories {
         maven {
             name = "agent-android"
-            url = uri("https://maven.pkg.github.com/reportportal/agent-android")
+            url = uri(publishRepo)
             credentials {
                 username = githubUserName
                 password = githubToken
