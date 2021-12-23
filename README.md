@@ -11,7 +11,7 @@
 [![Build with Love](https://img.shields.io/badge/build%20with-❤%EF%B8%8F%E2%80%8D-lightgrey.svg)](http://reportportal.io?style=flat)
 
 
-The latest version: 5.1.0-RC-2. Please use `Maven Central` link above to get the agent. Minimal supported API version: 26
+The latest version: 5.1.0-RC-3. Please use `Maven Central` link above to get the agent. Minimal supported API version: 26
 
 ## Overview: How to Add ReportPortal integration to Your Android Project
 Report Portal supports Android Espresso JUnit 5 tests. The integration is built on top of
@@ -83,7 +83,7 @@ available versions instead of copy-pasting them from here.
    ```
    * Add Report Portal agent dependency:
    ```groovy
-   implementation ('com.epam.reportportal:agent-android-junit5:5.1.0-RC-2') {
+   implementation ('com.epam.reportportal:agent-android-junit5:5.1.0-RC-3') {
        exclude group: 'org.aspectj' // AspectJ usually already included by Android
    }
    ```
@@ -165,7 +165,7 @@ dependencies {
     implementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // Report Portal libraries
-    implementation ('com.epam.reportportal:agent-android-junit5:5.1.0-RC-2') {
+    implementation ('com.epam.reportportal:agent-android-junit5:5.1.0-RC-3') {
         exclude group: 'org.aspectj' // AspectJ usually already included by Android
     }
     implementation ('com.epam.reportportal:logger-java-logback:5.0.3') {
