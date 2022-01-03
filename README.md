@@ -246,12 +246,13 @@ test phase only.
 ## Logging configuration
 ### Logback Framework
 #### Logback dependencies
-Put this dependency into `dependencies` section of your `build.gradle` file of integration test 
+Put this dependencies into `dependencies` section of your `build.gradle` file of integration test 
 module:
 ```groovy
-implementation ('com.epam.reportportal:logger-java-logback:5.0.3') {
+implementation ('com.epam.reportportal:logger-java-logback:5.1.0') {
     exclude group: 'com.epam.reportportal' // Already included by the agent dependency
 }
+implementation 'ch.qos.logback:logback-classic:1.2.10'
 ``` 
 
 #### 'logback.xml' file
