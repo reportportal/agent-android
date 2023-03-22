@@ -3,7 +3,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,22 +41,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Generate versions
-        uses: HardNorth/github-version-generate@v1.1.2
+        uses: HardNorth/github-version-generate@v1
         with:
           version-source: file
           version-file: ${{ env.VERSION_FILE }}
           version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
 
       - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
-          java-version: 1.8
+          distribution: 'temurin'
+          java-version: '8'
 
       - name: Setup git credentials
-        uses: oleksiyrudenko/gha-git-credentials@v2
+        uses: oleksiyrudenko/gha-git-credentials@v2.1.1
         with:
           name: 'reportportal.io'
           email: 'support@reportportal.io'
@@ -93,26 +94,22 @@ jobs:
 
       - name: Read changelog Entry
         id: readChangelogEntry
-        uses: mindsers/changelog-reader-action@v1.3.1
+        uses: mindsers/changelog-reader-action@v2
         with:
           version: ${{ env.RELEASE_VERSION }}
           path: ./${{ env.CHANGE_LOG_FILE }}
 
       - name: Create Release
         id: createRelease
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ env.RELEASE_VERSION }}
-          release_name: Release ${{ env.RELEASE_VERSION }}
-          body: ${{ steps.readChangelogEntry.outputs.log_entry }}
-          draft: false
-          prerelease: false
+          tag: ${{ env.RELEASE_VERSION }}
+          name: Release ${{ env.RELEASE_VERSION }}
+          body: ${{ steps.readChangelogEntry.outputs.changes }}
 
       - name: Checkout develop branch
         if: ${{ github.ref }} == ${{ env.RELEASE_BRANCH }}
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ env.DEVELOP_BRANCH }}
           fetch-depth: 0
