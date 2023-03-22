@@ -78,8 +78,8 @@ available versions instead of copy-pasting them from here.
      * `testImplementation 'junit:junit:4.+'`
    * Change `androidTestImplementation` keyword on `implementation` for Espresso libraries:
    ```groovy
-   implementation 'androidx.test.ext:junit:1.1.2'
-   implementation 'androidx.test.espresso:espresso-core:3.3.0'
+   implementation 'androidx.test.ext:junit:1.1.5'
+   implementation 'androidx.test.espresso:espresso-core:3.5.1'
    ```
    * Add Report Portal agent dependency:
    ```groovy
@@ -95,11 +95,11 @@ available versions instead of copy-pasting them from here.
    ```
    * Add JUnit 5 dependencies:
    ```groovy
-    implementation "org.junit.platform:junit-platform-runner:1.6.3"
-    implementation "org.junit.jupiter:junit-jupiter-engine:5.6.3"
+    implementation "org.junit.platform:junit-platform-runner:1.9.1"
+    implementation "org.junit.jupiter:junit-jupiter-engine:5.9.1"
 
     // JUnit5 (Optional) If you need "Parameterized Tests"
-    implementation "org.junit.jupiter:junit-jupiter-params:5.6.3"
+    implementation "org.junit.jupiter:junit-jupiter-params:5.9.1"
    ```
 
 Here is a full example of `build.gradle` file for Kotlin-based project (remember update library versions):
@@ -114,14 +114,14 @@ repositories {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     targetProjectPath ':app'
 
     defaultConfig {
         minSdkVersion 26
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -158,34 +158,34 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Android libraries for testing Activities
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // Android Espresso libraries
-    implementation 'androidx.test.ext:junit:1.1.2'
-    implementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'androidx.test.ext:junit:1.1.5'
+    implementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Report Portal libraries
     implementation ('com.epam.reportportal:agent-android-junit5:$LATEST_VERSION') {
         exclude group: 'org.aspectj' // AspectJ usually already included by Android
     }
-    implementation ('com.epam.reportportal:logger-java-logback:5.1.1') {
+    implementation ('com.epam.reportportal:logger-java-logback:5.1.4') {
         exclude group: 'com.epam.reportportal'
     }
 
     // Logging support
-    implementation 'ch.qos.logback:logback-classic:1.2.10'
+    implementation 'ch.qos.logback:logback-classic:1.4.5'
 
     // android-junit5 necessary libraries
-    implementation 'androidx.test:runner:1.3.0'
+    implementation 'androidx.test:runner:1.5.2'
     implementation 'de.mannodermaus.junit5:android-test-core:1.3.0'
     implementation 'de.mannodermaus.junit5:android-test-runner:1.3.0'
 
     // JUnit5 libraries, 'junit-jupiter-api' is inherited from agent
-    implementation "org.junit.platform:junit-platform-runner:1.6.3"
-    implementation "org.junit.jupiter:junit-jupiter-engine:5.6.3"
+    implementation "org.junit.platform:junit-platform-runner:1.9.1"
+    implementation "org.junit.jupiter:junit-jupiter-engine:5.9.1"
 
     // JUnit5 (Optional) If you need "Parameterized Tests"
-    implementation "org.junit.jupiter:junit-jupiter-params:5.6.3"
+    implementation "org.junit.jupiter:junit-jupiter-params:5.9.1"
 }
 ```
 ### Create `reportportal.properties` configuration file
@@ -249,7 +249,7 @@ test phase only.
 Put this dependency into `dependencies` section of your `build.gradle` file of integration test 
 module:
 ```groovy
-implementation ('com.epam.reportportal:logger-java-logback:5.1.1') {
+implementation ('com.epam.reportportal:logger-java-logback:5.1.4') {
     exclude group: 'com.epam.reportportal' // Already included by the agent dependency
 }
 ``` 
