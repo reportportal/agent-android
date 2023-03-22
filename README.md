@@ -90,8 +90,8 @@ available versions instead of copy-pasting them from here.
    * Add Android-JUnit5 dependencies:
    ```groovy
    implementation 'androidx.test:runner:1.3.0'
-   implementation 'de.mannodermaus.junit5:android-test-core:1.2.2'
-   implementation 'de.mannodermaus.junit5:android-test-runner:1.2.2'
+   implementation 'de.mannodermaus.junit5:android-test-core:1.3.0'
+   implementation 'de.mannodermaus.junit5:android-test-runner:1.3.0'
    ```
    * Add JUnit 5 dependencies:
    ```groovy
@@ -177,8 +177,8 @@ dependencies {
 
     // android-junit5 necessary libraries
     implementation 'androidx.test:runner:1.3.0'
-    implementation 'de.mannodermaus.junit5:android-test-core:1.2.1'
-    implementation 'de.mannodermaus.junit5:android-test-runner:1.2.1'
+    implementation 'de.mannodermaus.junit5:android-test-core:1.3.0'
+    implementation 'de.mannodermaus.junit5:android-test-runner:1.3.0'
 
     // JUnit5 libraries, 'junit-jupiter-api' is inherited from agent
     implementation "org.junit.platform:junit-platform-runner:1.6.3"
