@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [5.1.1]
 ### Changed
 - JUnit 5 agent version updated on [5.1.6](https://github.com/reportportal/agent-java-junit5/releases/tag/5.1.6), by @HardNorth
 - Client version updated on [5.1.16](https://github.com/reportportal/client-java/releases/tag/5.1.16), by @HardNorth
