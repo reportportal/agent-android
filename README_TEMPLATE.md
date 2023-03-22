@@ -228,16 +228,24 @@ module and put `AndroidManifest.xml` file there with the following content
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" package="com.epam.test">
+        xmlns:tools="http://schemas.android.com/tools" package="com.epam.test">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Allow plaintext traffic and disable backups for debug runs-->
+   <!-- Allow plaintext traffic and disable backups for debug runs-->
    <application
            android:allowBackup="false"
            android:usesCleartextTraffic="true"
-           tools:replace="android:allowBackup"/>
-
+           tools:replace="android:allowBackup">
+      <activity
+              android:name=".path.to.your.Activity"
+              android:exported="true">
+         <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+         </intent-filter>
+      </activity>
+   </application>
 </manifest>
 ```
 This overrides some properties in your original manifest allowing plain text requests during the 

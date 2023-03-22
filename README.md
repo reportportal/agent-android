@@ -235,10 +235,17 @@ module and put `AndroidManifest.xml` file there with the following content
     <!-- Allow plaintext traffic and disable backups for debug runs-->
    <application 
            android:allowBackup="false"
-           android:exported="true"
            android:usesCleartextTraffic="true"
-           tools:replace="android:allowBackup"/>
-
+           tools:replace="android:allowBackup">
+      <activity
+              android:name=".path.to.your.Activity"
+              android:exported="true">
+         <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+         </intent-filter>
+      </activity>
+   </application>
 </manifest>
 ```
 This overrides some properties in your original manifest allowing plain text requests during the 
