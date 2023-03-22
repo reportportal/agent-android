@@ -4,6 +4,8 @@
 ### Changed
 - JUnit 5 agent version updated on [5.1.6](https://github.com/reportportal/agent-java-junit5/releases/tag/5.1.6), by @HardNorth
 - Client version updated on [5.1.16](https://github.com/reportportal/client-java/releases/tag/5.1.16), by @HardNorth
+- Kotlin version update on 1.8.0, by @HardNorth
+- JUnit 5 version update on 5.9.1, by @HardNorth
 
 ## [5.1.0]
 ### Added
