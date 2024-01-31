@@ -3,10 +3,11 @@
 ## [Unreleased]
 ### Removed
 - Java 8 version support, by @HardNorth
+- Java 11 version support, by @HardNorth
 ### Changed
 - JUnit 5 agent version updated on [5.2.0](https://github.com/reportportal/agent-java-junit5/releases/tag/5.2.0), by @HardNorth
 - Client version updated on [5.2.2](https://github.com/reportportal/client-java/releases/tag/5.2.2), by @HardNorth
-- Switch on Java 11 compile target, by @HardNorth
+- Switch on Java 17 compile target, by @HardNorth
 
 ## [5.1.1]
 ### Changed
