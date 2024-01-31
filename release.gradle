@@ -61,58 +61,60 @@ def pomConfig = {
     }
 }
 
-publishing {
-    publications {
-        release(MavenPublication) {
-            groupId project.group
-            artifactId project.name
-            version project.version
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
 
-            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-            artifact androidSourcesJar
-            artifact javadocJar
+                artifact bundleReleaseAar
+                artifact androidSourcesJar
+                artifact javadocJar
 
-            pom {
-                name = project.name
-                description = project.description
+                pom {
+                    name = project.name
+                    description = project.description
 
 
-                withXml {
-                    asNode().children().last() + pomConfig
+                    withXml {
+                        asNode().children().last() + pomConfig
 
-                    def dependenciesNode = asNode().appendNode("dependencies")
-                    project.configurations.implementation
-                            .allDependencies
-                            .findAll { it.name != "unspecified" }
-                            .each {
-                                def dependencyNode = dependenciesNode.appendNode("dependency")
-                                dependencyNode.appendNode("groupId", it.group)
-                                dependencyNode.appendNode("artifactId", it.name)
-                                dependencyNode.appendNode("version", it.version)
-                                dependencyNode.appendNode("scope", "runtime")
-                            }
-                    project.configurations.api
-                            .allDependencies
-                            .findAll { it.name != "unspecified" }
-                            .each {
-                                def dependencyNode = dependenciesNode.appendNode("dependency")
-                                dependencyNode.appendNode("groupId", it.group)
-                                dependencyNode.appendNode("artifactId", it.name)
-                                dependencyNode.appendNode("version", it.version)
-                                dependencyNode.appendNode("scope", "compile")
-                            }
+                        def dependenciesNode = asNode().appendNode("dependencies")
+                        project.configurations.implementation
+                                .allDependencies
+                                .findAll { it.name != "unspecified" }
+                                .each {
+                                    def dependencyNode = dependenciesNode.appendNode("dependency")
+                                    dependencyNode.appendNode("groupId", it.group)
+                                    dependencyNode.appendNode("artifactId", it.name)
+                                    dependencyNode.appendNode("version", it.version)
+                                    dependencyNode.appendNode("scope", "runtime")
+                                }
+                        project.configurations.api
+                                .allDependencies
+                                .findAll { it.name != "unspecified" }
+                                .each {
+                                    def dependencyNode = dependenciesNode.appendNode("dependency")
+                                    dependencyNode.appendNode("groupId", it.group)
+                                    dependencyNode.appendNode("artifactId", it.name)
+                                    dependencyNode.appendNode("version", it.version)
+                                    dependencyNode.appendNode("scope", "compile")
+                                }
+                    }
                 }
             }
         }
-    }
 
-    repositories {
-        maven {
-            name = "agent-android"
-            url = uri(publishRepo)
-            credentials {
-                username = githubUserName
-                password = githubToken
+        repositories {
+            maven {
+                name = "agent-android"
+                url = uri(publishRepo)
+                credentials {
+                    username = githubUserName
+                    password = githubToken
+                }
             }
         }
     }
