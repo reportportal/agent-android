@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [5.2.0]
 ### Removed
 - Java 8 version support, by @HardNorth
 - Java 11 version support, by @HardNorth
