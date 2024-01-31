@@ -24,6 +24,8 @@ apply from: "${rootProject.rootDir}/release.gradle"
 apply from: "${project.scripts_url}/${project.scripts_branch}/signing.gradle"
 
 android {
+    namespace 'com.epam.reportportal.android.junit5'
+
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
