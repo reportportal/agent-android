@@ -11,7 +11,7 @@
 [![Build with Love](https://img.shields.io/badge/build%20with-❤%EF%B8%8F%E2%80%8D-lightgrey.svg)](http://reportportal.io?style=flat)
 
 
-The latest version: 5.1.1. Please use `Maven Central` link above to get the agent. Minimal supported API version: 26
+The latest version: 5.2.0. Please use `Maven Central` link above to get the agent. Minimal supported API version: 26
 
 ## Overview: How to Add ReportPortal integration to Your Android Project
 Report Portal supports Android Espresso JUnit 5 tests. The integration is built on top of
@@ -83,7 +83,7 @@ available versions instead of copy-pasting them from here.
    ```
    * Add Report Portal agent dependency:
    ```groovy
-   implementation ('com.epam.reportportal:agent-android-junit5:5.1.1') {
+   implementation ('com.epam.reportportal:agent-android-junit5:5.2.0') {
        exclude group: 'org.aspectj' // AspectJ usually already included by Android
    }
    ```
@@ -165,7 +165,7 @@ dependencies {
     implementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Report Portal libraries
-    implementation ('com.epam.reportportal:agent-android-junit5:5.1.1') {
+    implementation ('com.epam.reportportal:agent-android-junit5:5.2.0') {
         exclude group: 'org.aspectj' // AspectJ usually already included by Android
     }
     implementation ('com.epam.reportportal:logger-java-logback:5.1.4') {
@@ -228,12 +228,12 @@ module and put `AndroidManifest.xml` file there with the following content
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" package="com.epam.test">
+        xmlns:tools="http://schemas.android.com/tools" package="com.epam.test">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Allow plaintext traffic and disable backups for debug runs-->
-   <application 
+   <!-- Allow plaintext traffic and disable backups for debug runs-->
+   <application
            android:allowBackup="false"
            android:usesCleartextTraffic="true"
            tools:replace="android:allowBackup">
