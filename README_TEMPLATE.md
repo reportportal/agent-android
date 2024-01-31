@@ -172,8 +172,8 @@ dependencies {
         exclude group: 'com.epam.reportportal'
     }
 
-    // Logging support
-    implementation 'ch.qos.logback:logback-classic:1.4.5'
+    // Logging support, newer versions of logback do not support Android
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
 
     // android-junit5 necessary libraries
     implementation 'androidx.test:runner:1.5.2'
@@ -228,16 +228,24 @@ module and put `AndroidManifest.xml` file there with the following content
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" package="com.epam.test">
+        xmlns:tools="http://schemas.android.com/tools" package="com.epam.test">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Allow plaintext traffic and disable backups for debug runs-->
-    <application
-        android:allowBackup="false"
-        android:usesCleartextTraffic="true"
-        tools:replace="android:allowBackup"/>
-
+   <!-- Allow plaintext traffic and disable backups for debug runs-->
+   <application
+           android:allowBackup="false"
+           android:usesCleartextTraffic="true"
+           tools:replace="android:allowBackup">
+      <activity
+              android:name=".path.to.your.Activity"
+              android:exported="true">
+         <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+         </intent-filter>
+      </activity>
+   </application>
 </manifest>
 ```
 This overrides some properties in your original manifest allowing plain text requests during the 

@@ -24,12 +24,12 @@ apply from: "${rootProject.rootDir}/release.gradle"
 apply from: "${project.scripts_url}/${project.scripts_branch}/signing.gradle"
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "30.0.3"
+    namespace 'com.epam.reportportal.android.junit5'
 
     defaultConfig {
         minSdkVersion 26
-        targetSdkVersion 33
+        compileSdk 34
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -44,12 +44,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_17
     }
 }
 
@@ -83,9 +83,9 @@ dependencies {
     implementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Report Portal libraries
-    internalize 'com.epam.reportportal:agent-java-junit5:5.1.6'
+    internalize 'com.epam.reportportal:agent-java-junit5:5.2.0'
     api tasks.internalizeJar.outputs.files
-    api 'com.epam.reportportal:client-java:5.1.16'
+    api 'com.epam.reportportal:client-java:5.2.2'
     api 'com.google.code.findbugs:jsr305:3.0.2'
     api 'com.epam.reportportal:commons-model:5.0.0'
 
