@@ -64,6 +64,7 @@ configurations {
 }
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 task internalizeJar(type: ShadowJar) {
     dependencies {
         include(dependency('com.epam.reportportal:agent-java-junit5'))
@@ -88,11 +89,10 @@ dependencies {
     implementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Report Portal libraries
-    internalize ('com.epam.reportportal:agent-java-junit5:5.3.0') {
-        exclude group: 'org.aspectj' // AspectJ is already included by Android
-    }
+    internalize(group: 'com.epam.reportportal', name: 'agent-java-junit5', version: '5.3.0', transitive: false)
     api tasks.internalizeJar.outputs.files
-    api ('com.epam.reportportal:client-java:5.2.5') {
+    // Next two dependencies are required due to internalization
+    api('com.epam.reportportal:client-java:5.2.6') {
         exclude group: 'org.aspectj' // AspectJ is already included by Android
     }
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
