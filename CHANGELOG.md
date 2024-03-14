@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 ### Changed
-- JUnit 5 agent version updated on [5.2.1](https://github.com/reportportal/agent-java-junit5/releases/tag/5.2.1), by @HardNorth
+- JUnit 5 agent version updated on [5.3.0](https://github.com/reportportal/agent-java-junit5/releases/tag/5.3.0), by @HardNorth
 - `Android-JUnit5` version updated on `1.4.0`, by @HardNorth
 - Client version updated on [5.2.5](https://github.com/reportportal/client-java/releases/tag/5.2.5), by @HardNorth
 
