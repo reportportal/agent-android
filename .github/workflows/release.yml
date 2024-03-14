@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Generate versions
         uses: HardNorth/github-version-generate@v1
@@ -51,7 +51,7 @@ jobs:
           version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -109,7 +109,7 @@ jobs:
 
       - name: Checkout develop branch
         if: ${{ github.ref }} == ${{ env.RELEASE_BRANCH }}
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ env.DEVELOP_BRANCH }}
           fetch-depth: 0
