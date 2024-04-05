@@ -89,17 +89,17 @@ available versions instead of copy-pasting them from here.
    ```
    * Add Android-JUnit5 dependencies:
    ```groovy
-   implementation 'androidx.test:runner:1.3.0'
-   implementation 'de.mannodermaus.junit5:android-test-core:1.3.0'
-   implementation 'de.mannodermaus.junit5:android-test-runner:1.3.0'
+   implementation 'androidx.test:runner:1.5.2'
+   implementation 'de.mannodermaus.junit5:android-test-core:1.4.0'
+   implementation 'de.mannodermaus.junit5:android-test-runner:1.4.0'
    ```
    * Add JUnit 5 dependencies:
    ```groovy
-    implementation "org.junit.platform:junit-platform-runner:1.9.1"
-    implementation "org.junit.jupiter:junit-jupiter-engine:5.9.1"
+    implementation "org.junit.platform:junit-platform-runner:1.9.3"
+    implementation "org.junit.jupiter:junit-jupiter-engine:5.9.3"
 
     // JUnit5 (Optional) If you need "Parameterized Tests"
-    implementation "org.junit.jupiter:junit-jupiter-params:5.9.1"
+    implementation "org.junit.jupiter:junit-jupiter-params:5.9.3"
    ```
 
 Here is a full example of `build.gradle` file for Kotlin-based project (remember update library versions):
@@ -168,12 +168,10 @@ dependencies {
     implementation ('com.epam.reportportal:agent-android-junit5:5.2.2') {
         exclude group: 'org.aspectj' // AspectJ usually already included by Android
     }
-    implementation ('com.epam.reportportal:logger-java-logback:5.1.4') {
-        exclude group: 'com.epam.reportportal'
-    }
+    implementation 'com.epam.reportportal:logger-java-logback:5.2.2'
 
     // Logging support, newer versions of logback do not support Android
-    implementation 'ch.qos.logback:logback-classic:1.2.11'
+    implementation 'ch.qos.logback:logback-classic:1.3.12'
 
     // android-junit5 necessary libraries
     implementation 'androidx.test:runner:1.5.2'
@@ -257,9 +255,7 @@ test phase only.
 Put this dependency into `dependencies` section of your `build.gradle` file of integration test 
 module:
 ```groovy
-implementation ('com.epam.reportportal:logger-java-logback:5.1.4') {
-    exclude group: 'com.epam.reportportal' // Already included by the agent dependency
-}
+implementation 'com.epam.reportportal:logger-java-logback:5.2.2'
 ``` 
 
 #### 'logback.xml' file
