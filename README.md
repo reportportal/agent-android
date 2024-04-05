@@ -11,7 +11,7 @@
 [![Build with Love](https://img.shields.io/badge/build%20with-❤%EF%B8%8F%E2%80%8D-lightgrey.svg)](http://reportportal.io?style=flat)
 
 
-The latest version: 5.2.2. Please use `Maven Central` link above to get the agent. Minimal supported API version: 26
+The latest version: 5.2.3. Please use `Maven Central` link above to get the agent. Minimal supported API version: 26
 
 ## Overview: How to Add ReportPortal integration to Your Android Project
 Report Portal supports Android Espresso JUnit 5 tests. The integration is built on top of
@@ -83,7 +83,7 @@ available versions instead of copy-pasting them from here.
    ```
    * Add Report Portal agent dependency:
    ```groovy
-   implementation ('com.epam.reportportal:agent-android-junit5:5.2.2') {
+   implementation ('com.epam.reportportal:agent-android-junit5:5.2.3') {
        exclude group: 'org.aspectj' // AspectJ usually already included by Android
    }
    ```
@@ -95,11 +95,11 @@ available versions instead of copy-pasting them from here.
    ```
    * Add JUnit 5 dependencies:
    ```groovy
-    implementation "org.junit.platform:junit-platform-runner:1.9.3"
-    implementation "org.junit.jupiter:junit-jupiter-engine:5.9.3"
+    implementation "org.junit.platform:junit-platform-runner:1.10.0"
+    implementation "org.junit.jupiter:junit-jupiter-engine:5.10.0"
 
     // JUnit5 (Optional) If you need "Parameterized Tests"
-    implementation "org.junit.jupiter:junit-jupiter-params:5.9.3"
+    implementation "org.junit.jupiter:junit-jupiter-params:5.10.0"
    ```
 
 Here is a full example of `build.gradle` file for Kotlin-based project (remember update library versions):
@@ -165,7 +165,7 @@ dependencies {
     implementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Report Portal libraries
-    implementation ('com.epam.reportportal:agent-android-junit5:5.2.2') {
+    implementation ('com.epam.reportportal:agent-android-junit5:5.2.3') {
         exclude group: 'org.aspectj' // AspectJ usually already included by Android
     }
     implementation 'com.epam.reportportal:logger-java-logback:5.2.2'
@@ -175,15 +175,15 @@ dependencies {
 
     // android-junit5 necessary libraries
     implementation 'androidx.test:runner:1.5.2'
-    implementation 'de.mannodermaus.junit5:android-test-core:1.3.0'
-    implementation 'de.mannodermaus.junit5:android-test-runner:1.3.0'
+    implementation 'de.mannodermaus.junit5:android-test-core:1.4.0'
+    implementation 'de.mannodermaus.junit5:android-test-runner:1.4.0'
 
     // JUnit5 libraries, 'junit-jupiter-api' is inherited from agent
-    implementation "org.junit.platform:junit-platform-runner:1.9.1"
-    implementation "org.junit.jupiter:junit-jupiter-engine:5.9.1"
+    implementation "org.junit.platform:junit-platform-runner:1.10.0"
+    implementation "org.junit.jupiter:junit-jupiter-engine:5.10.0"
 
     // JUnit5 (Optional) If you need "Parameterized Tests"
-    implementation "org.junit.jupiter:junit-jupiter-params:5.9.1"
+    implementation "org.junit.jupiter:junit-jupiter-params:5.10.0"
 }
 ```
 ### Create `reportportal.properties` configuration file
