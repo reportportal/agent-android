@@ -16,20 +16,20 @@
 
 buildscript {
     ext {
-        agp_version = '8.2.2'
+        agp_version = '8.3.2'
         kotlin_version = '1.9.10'
     }
     repositories {
         google()
         mavenCentral()
-        jcenter()
+        gradlePluginPortal()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$agp_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$kotlin_version"
         classpath 'net.researchgate:gradle-release:2.8.1'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+        classpath 'com.github.johnrengelman:shadow:8.1.1'
     }
 }
 
@@ -37,7 +37,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
     }
 }
 
