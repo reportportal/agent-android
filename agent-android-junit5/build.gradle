@@ -28,8 +28,8 @@ android {
 
     defaultConfig {
         minSdkVersion 26
-        compileSdk 34
-        targetSdk 34
+        compileSdk 35
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -83,14 +83,14 @@ dependencies {
     compileOnly "androidx.test:runner:1.5.2"
 
     // Report Portal libraries
-    internalize(group: 'com.epam.reportportal', name: 'agent-java-junit5', version: '5.3.5', transitive: false)
+    internalize(group: 'com.epam.reportportal', name: 'agent-java-junit5', version: '5.4.0', transitive: false)
     api tasks.internalizeJar.outputs.files
     // Next three dependencies are required due to internalization
-    api('com.epam.reportportal:client-java:5.2.26') {
+    api('com.epam.reportportal:client-java:5.3.14') {
         exclude group: 'org.aspectj' // AspectJ is already included by Android
     }
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
-    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation 'org.slf4j:slf4j-api:2.0.17'
 
     // JUnit 5
     compileOnly "org.junit.jupiter:junit-jupiter-api:${junit5_version}"
