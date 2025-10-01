@@ -83,13 +83,12 @@ dependencies {
     compileOnly "androidx.test:runner:1.5.2"
 
     // Report Portal libraries
-    internalize(group: 'com.epam.reportportal', name: 'agent-java-junit5', version: '5.4.0', transitive: false)
+    internalize(group: 'com.epam.reportportal', name: 'agent-java-junit5', version: '5.5.2', transitive: false)
     api tasks.internalizeJar.outputs.files
     // Next three dependencies are required due to internalization
-    api('com.epam.reportportal:client-java:5.3.14') {
+    api('com.epam.reportportal:client-java:5.4.3') {
         exclude group: 'org.aspectj' // AspectJ is already included by Android
     }
-    implementation 'com.google.code.findbugs:jsr305:3.0.2'
     implementation 'org.slf4j:slf4j-api:2.0.17'
 
     // JUnit 5
