@@ -27,7 +27,7 @@ jobs:
     with:
       version: ${{ github.event.inputs.version }}
       artifact: agent-android-junit5
-      package_suffixes: '-javadoc.jar,-javadoc.jar.asc,-sources.jar,-sources.jar.asc,.pom,.pom.asc,.aar,.aar.asc'
+      package_suffixes: '-javadoc.jar,-javadoc.jar.asc,-javadoc.jar.md5,-javadoc.jar.sha1,-javadoc.jar.sha256,-javadoc.jar.sha512,-sources.jar,-sources.jar.asc,-sources.jar.md5,-sources.jar.sha1,-sources.jar.sha256,-sources.jar.sha512,.pom,.pom.asc,.pom.md5,.pom.sha1,.pom.sha256,.pom.sha512,.aar,.aar.asc,.aar.md5,.aar.sha1,.aar.sha256,.aar.sha512'
     secrets:
       SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
       SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
